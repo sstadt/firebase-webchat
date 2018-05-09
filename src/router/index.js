@@ -1,15 +1,13 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Hello from '@/components/Hello'
 
-Vue.use(Router)
+import Router from 'vue-router'
+
+import Auth from '@/components/Auth'
+import Chat from '@/components/Chat'
 
 export default new Router({
   routes: [
-    {
-      path: '/',
-      name: 'Hello',
-      component: Hello
-    }
+    { path: '/', name: 'Auth', component: Auth },
+    { path: '/auth', name: 'Auth', component: Auth },
+    { path: '/chat', name: 'Chat', component: Chat }
   ]
 })
