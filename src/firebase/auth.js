@@ -1,10 +1,10 @@
 
 import firebase from './index'
 
-export function login () {
-  const provider = new firebase.auth.GoogleAuthProvider()
+export function login (provider) {
+  var authProvider = new firebase.auth.GoogleAuthProvider()
 
-  return firebase.auth().signInWithPopup(provider).then((result) => {
+  return firebase.auth().signInWithPopup(authProvider).then((result) => {
     console.log('Auth worked!', result)
     this.$router.push('/chat')
   }, (error) => {

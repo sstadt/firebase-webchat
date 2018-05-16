@@ -10,20 +10,15 @@
     </div>
   </nav>
   <main>
-    <img src="../assets/logo.png" alt="Vue.js PWA">
     <router-view></router-view>
   </main>
-  <div class="chatbox">
-    <div class="chatlogs">
-      <div v-for="item in anArray">
-        <span class="chat-name">{{item.name}}</span>
-        <div class="chat friend">
-          <img class="user-photo" v-bind:src="item.photo_url" />
-          <div class="chat-message">
-            <p>{{item.message}} </p>
-            <p><span class="chat-time"> {{item.timestamp | formatDate}}</span></p>
-          </div>
-        </div>
+  <div class="chat-frame">
+    <div v-for="item in anArray" class="chat-message">
+      <img class="chat-message__avatar" :src="item.photo_url" />
+      <div class="chat-message__body">
+        <p class="chat-message__user">{{item.name}}</p>
+        <p class="chat-message__timestamp">{{item.timestamp | formatDate}}</p>
+        <p class="chat-message__message">{{item.message}}</p>
       </div>
     </div>
     <form @submit.prevent="addComment">
@@ -42,10 +37,10 @@ import firebase, { chatRef } from '../firebase/index'
 import Vue from 'vue'
 import Vuefire from 'vuefire'
 import moment from 'moment'
-import dateFilter from '../utils/filter.js'
+import dateFilter from '../utils/dateFilter.js'
 
 Vue.use(Vuefire)
-Vue.filter('formatDate', datFilter)
+Vue.filter('formatDate', dateFilter)
 
 export default {
   name: 'chat',
@@ -105,4 +100,35 @@ export default {
 </script>
 
 <style>
+.chat-message {
+  display: flex;
+  padding: 10px;
+}
+
+.chat-message__body {
+  padding-left: 10px;
+}
+
+.chat-message__user,
+.chat-message__message,
+.chat-message__timestamp {
+  margin: 0;
+}
+
+.chat-message__avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.chat-message__user {
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.chat-message__timestamp {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+}
 </style>
